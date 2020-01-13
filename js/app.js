@@ -1,8 +1,54 @@
 document.getElementById('formTask').addEventListener('submit',saveTask)
 
 function saveTask(e){
-    console.log(e);
-    alert('hello');
 
+    let title = document.getElementById('title').value;
+    let description = document.getElementById('description').value;
+
+    //console.log(title,description);
+
+    //nuestro objeto de la tarea con el titulo de la tarea y su descripcion
+    const task = {
+        title: title,
+        description: description
+    };
+
+    let tasks = [];
+
+    // tasks.push(task);
+    // tasks.push(task);
+    // tasks.push(task);
+
+    // console.log(tasks);
+
+    //localStorage.setItem('tasks', JSON.stringify(task));
+    //JSON.parse(localStorage.getItem('tasks'));
+    //!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!
+    //! para almacenar u obtener los datos del localStorage
+    //preguntamos si existe la tarea
+    //todo esto pasa si no tenemos una tarea almacenada
+    if(localStorage.getItem('tasks') === null){
+        //declaramos un array de tareas vacia
+        let tasks = [];
+        //con el metodo push agregamos la tarea en la variable tasks
+        tasks.push(task);
+        //colocamos la tarea en el localStorage convirtiendo a string
+        localStorage.setItem('tasks',JSON.stringify(tasks));
+    //si ya existen tarea guardadas
+    }else{
+        //obtenemos las tareas del localStorage, luego lo convertimos a JSON y lo guardamos en la variable tasks
+        let tasks = JSON.parse(localStorage.getItem('tasks'));
+        //console.log(tasks);
+        //con el metodo push agregamos la nueva tarea en la variable tasks
+        tasks.push(task);
+        //colocamos la tarea en el localStorage convirtiendo a string
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+    //!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!/!
     e.preventDefault();
 }
+
+// function getTasks(){
+//     let tasks = JSON.parse(localStorage.getItem('tasks'));
+//     let tasksView = document.getElementById('tasks');
+// }
