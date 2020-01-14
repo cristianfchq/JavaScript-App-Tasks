@@ -73,13 +73,25 @@ function getTasks(){
         <div class="card mb-3">
             <div class="card-body">
                 <p>${title} - ${description}</p>
-                <a class="btn btn-danger">
+                <a class="btn btn-danger" onclick="deleteTask('${title}')">
                     Delete
                 </a>
             </div>
         </div>
         `;
     }
+}
+
+function deleteTask(title){
+    // console.log(title);
+    let tasks = JSON.parse(localStorage.getItem('tasks'));
+    for(let i = 0; i < tasks.length; i++){
+        if(tasks[i].title == title){
+            tasks.splice(i,1);
+        }
+    }
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    getTasks();
 }
 
 getTasks(); 
