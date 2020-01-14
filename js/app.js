@@ -48,7 +48,7 @@ function saveTask(e){
 
     getTasks();
 
-
+    document.getElementById('formTask').reset();
     e.preventDefault();
 }
 
